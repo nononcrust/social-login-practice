@@ -1,7 +1,7 @@
 import { DUMMY_USER } from "@/app/api/auth/me/route";
 import { api } from "@/configs/axios";
 import { getQueryClient } from "@/lib/react-query";
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 
 const ENDPOINT = "/auth";
@@ -9,15 +9,19 @@ const ENDPOINT = "/auth";
 export const authApi = {
   getUserInfo: async () => {
     const response = await api.get(ENDPOINT + "/me");
-    return userInfoSchema.parse(response.data);
+    return userInfoResponseSchema.parse(response.data);
   },
 };
 
 export const userInfoSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   nickname: z.string(),
   email: z.string(),
   profileImage: z.string(),
+});
+
+export const userInfoResponseSchema = z.object({
+  user: userInfoSchema.optional(),
 });
 
 export type UserInfo = z.infer<typeof userInfoSchema>;
@@ -34,7 +38,6 @@ export const useUserInfo = () => {
 };
 
 const getUserInfo = async () => {
-  console.log("getting user info...");
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(DUMMY_USER);
@@ -44,10 +47,12 @@ const getUserInfo = async () => {
 
 export const prefetchUserInfo = async () => {
   const queryClient = getQueryClient();
-  const dehydratedState = await queryClient.prefetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: queryKeys.userInfo(),
     queryFn: getUserInfo,
   });
+
+  const dehydratedState = dehydrate(queryClient);
 
   return { dehydratedState };
 };

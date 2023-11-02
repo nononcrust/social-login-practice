@@ -3,8 +3,8 @@ import axios from "axios";
 import { z } from "zod";
 import { userInfoSchema } from "./auth";
 
-const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
-const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI!;
+const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!;
 
 const ENDPOINT = {
   KAKAO_TOKEN_URL: "https://kauth.kakao.com/oauth/token",

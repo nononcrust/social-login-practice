@@ -1,12 +1,9 @@
+import { KAKAO_LOGIN_URL } from "@/features/kakao";
 import Link from "next/link";
 
-interface KakaoLoginButtonProps {
-  href: string;
-}
-
-export const KakaoLoginButton = ({ href }: KakaoLoginButtonProps) => {
+export const KakaoLoginButton = () => {
   return (
-    <Link href={href}>
+    <Link href={KAKAO_LOGIN_URL} replace>
       <svg
         width="48"
         height="48"

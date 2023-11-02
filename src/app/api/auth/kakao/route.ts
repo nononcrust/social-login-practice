@@ -27,7 +27,7 @@ export const POST = async (request: NextRequest) => {
   // TODO: save user info to database
 
   const userInfo = {
-    id: kakaoUserInfo.id,
+    id: String(kakaoUserInfo.id),
     nickname: kakaoUserInfo.properties.nickname,
     email: "dev.nonon@gmail.com",
     profileImage: kakaoUserInfo.properties.profile_image,

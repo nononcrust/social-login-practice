@@ -1,12 +1,9 @@
+import { NAVER_LOGIN_URL } from "@/features/naver";
 import Link from "next/link";
 
-interface NaverLoginButtonProps {
-  href: string;
-}
-
-export const NaverLoginButton = ({ href }: NaverLoginButtonProps) => {
+export const NaverLoginButton = () => {
   return (
-    <Link href={href}>
+    <Link href={NAVER_LOGIN_URL} replace>
       <svg
         width="48"
         height="48"

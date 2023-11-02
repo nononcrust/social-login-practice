@@ -1,13 +1,18 @@
-import Link from "next/link";
+"use client";
 
-interface GoogleLoginButtonProps {
-  href: string;
-}
+import { GOOGLE_REDIRECT_URI } from "@/features/google";
+import { useGoogleLogin } from "@react-oauth/google";
 
-export const GoogleLoginButton = ({ href }: GoogleLoginButtonProps) => {
+export const GoogleLoginButton = () => {
+  const login = useGoogleLogin({
+    ux_mode: "redirect",
+    redirect_uri: GOOGLE_REDIRECT_URI,
+    flow: "auth-code",
+  });
+
   return (
-    <Link
-      href={href}
+    <button
+      onClick={login}
       className="flex h-[48px] w-[48px] items-center justify-center rounded-full border"
     >
       <svg
@@ -43,6 +48,6 @@ export const GoogleLoginButton = ({ href }: GoogleLoginButtonProps) => {
           <path d="M0 0h20v20H0z"></path>
         </g>
       </svg>
-    </Link>
+    </button>
   );
 };

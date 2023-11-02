@@ -8,10 +8,7 @@ export const useAuth = () => {
 
   const logout = () => {
     cookie.remove(STORAGE_KEY.ACCESS_TOKEN);
-    queryClient.resetQueries({
-      queryKey: queryKeys.userInfo(),
-      exact: true,
-    });
+    queryClient.setQueryData(queryKeys.userInfo(), null);
   };
 
   return { logout };
