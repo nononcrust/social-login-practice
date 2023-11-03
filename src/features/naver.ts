@@ -5,7 +5,6 @@ import { z } from "zod";
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID!;
 const NAVER_REDIRECT_URI = process.env.NEXT_PUBLIC_NAVER_REDIRECT_URI!;
 export const NAVER_CLIENT_SECRET = process.env.NAVER_CLIENT_SECRET!;
-
 export const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${NAVER_REDIRECT_URI}`;
 
 const ENDPOINT = {
@@ -26,7 +25,7 @@ export const naverApi = {
       client_secret: NAVER_CLIENT_SECRET,
       redirect_uri: NAVER_REDIRECT_URI,
       code: code,
-      state: "123",
+      state: "random string",
     };
 
     const response = await axios.get(ENDPOINT.TOKEN, { params });

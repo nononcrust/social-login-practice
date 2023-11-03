@@ -24,6 +24,11 @@ export const userInfoResponseSchema = z.object({
   user: userInfoSchema.optional(),
 });
 
+export const socialLoginResponseSchema = z.object({
+  accessToken: z.string(),
+  userInfo: userInfoSchema,
+});
+
 export type UserInfo = z.infer<typeof userInfoSchema>;
 
 export const queryKeys = {

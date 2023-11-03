@@ -31,7 +31,9 @@ export const useKakaoCallback = () => {
   );
 
   useEffect(() => {
-    if (code && !initialized.current) {
+    if (initialized.current) return;
+
+    if (code) {
       loginWithAuthCode(code);
       initialized.current = true;
     } else {

@@ -5,13 +5,12 @@ import { userInfoSchema } from "./auth";
 
 const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI!;
 const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!;
+export const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const ENDPOINT = {
-  KAKAO_TOKEN_URL: "https://kauth.kakao.com/oauth/token",
-  KAKAO_USER_INFO_URL: "https://kapi.kakao.com/v2/user/me",
+  TOKEN: "https://kauth.kakao.com/oauth/token",
+  USER_INFO: "https://kapi.kakao.com/v2/user/me",
 };
-
-export const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 export const kakaoApi = {
   login: async (body: { code: string }) => {
@@ -26,7 +25,7 @@ export const kakaoApi = {
       code: code,
     };
 
-    const response = await axios.post(ENDPOINT.KAKAO_TOKEN_URL, data, {
+    const response = await axios.post(ENDPOINT.TOKEN, data, {
       headers: {
         "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
@@ -34,7 +33,7 @@ export const kakaoApi = {
     return kakaoTokenSchema.parse(response.data);
   },
   getUserInfo: async (accessToken: string) => {
-    const response = await axios.get(ENDPOINT.KAKAO_USER_INFO_URL, {
+    const response = await axios.get(ENDPOINT.USER_INFO, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
