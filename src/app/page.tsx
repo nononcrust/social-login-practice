@@ -15,7 +15,6 @@ export default function Home() {
         <Link
           href={ROUTE.LOGIN}
           className="rounded-md bg-black px-4 py-2 font-medium text-white transition hover:bg-gray-800"
-          onClick={logout}
         >
           로그인
         </Link>
