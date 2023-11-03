@@ -3,8 +3,8 @@ import axios from "axios";
 import { z } from "zod";
 import { socialLoginResponseSchema } from "./auth";
 
-export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!;
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 export const GOOGLE_REDIRECT_URI = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI!;
 
 export const ENDPOINT = {

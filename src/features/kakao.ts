@@ -3,9 +3,10 @@ import axios from "axios";
 import { z } from "zod";
 import { userInfoSchema } from "./auth";
 
-const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI!;
-const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!;
-export const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!;
+const KAKAO_CLIENT_SECRET = process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET!;
+const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI!;
+export const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 const ENDPOINT = {
   TOKEN: "https://kauth.kakao.com/oauth/token",
@@ -20,8 +21,9 @@ export const kakaoApi = {
   getAccessToken: async (code: string) => {
     const data = {
       grant_type: "authorization_code",
-      client_id: CLIENT_ID,
-      redirect_uri: REDIRECT_URI,
+      client_id: KAKAO_CLIENT_ID,
+      client_secret: KAKAO_CLIENT_SECRET,
+      redirect_uri: KAKAO_REDIRECT_URI,
       code: code,
     };
 
